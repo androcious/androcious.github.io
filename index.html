@@ -5,18 +5,112 @@
     <title>Index Page</title>
 </head>
 <body>
-Hello World!
+<style>
+    .collapsible {
+        background-color: #777;
+        color: white;
+        cursor: pointer;
+        padding: 18px;
+        width: 100%;
+        border: none;
+        text-align: left;
+        outline: none;
+        font-size: 15px;
+    }
 
-<svg>
-    <circle class="target" style="fill: #69b3a2" stroke="black" cx=50 cy=50 r=40></circle>
-</svg>
+    .active, .collapsible:hover {
+        background-color: #555;
+    }
+
+    .collapsible:after {
+        content: '\002B';
+        color: white;
+        font-weight: bold;
+        float: left;
+        margin-left: 5px;
+    }
+
+    .active:after {
+        content: "\2212";
+    }
+
+    .content {
+        padding: 0 18px;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.2s ease-out;
+        background-color: #f1f1f1;
+    }
+    p.a {
+        font-family: "Comic Sans MS", cursive, sans-serif;
+    }
+</style>
+
+<table width="100%">
+    <tr align="center" >
+<td><img src="usa.png" width = "200" height="100"></td><td><h1 style="text-align:center;">Case Study: Legal Immigration from India to USA</h1></td><td><img src="india.png" width = "200" height="100">
+    </td> </tr></table>
+<hr>
+   <p class="a"> <a name="href1"><B>Migration in General:</B></a></p><br>
+Migration is a phenomenon that is embedded in nature itself. Birds migrate based on seasons traveling thousands of miles looking for favorable climates to thrive in.
+Humans too since time immemorial have been moving across continents, some for conquest - others to explore. In today's world also migration is primarily "need-driven". While some choose to emigrate pursuing 'perceived' better opportunity, others might be fleeing persecution.
+<br><br>
+<p class="a"><a name="href2"><B>Case in Point</B></a><br>
+While there are several legal pathways to entering the United States of America, there are a few paths that allow for permanent residency leading to citizenship. This specific case illustrates in particular the intense process involved in the highly competitive H1B dual intent visa from India.
+While every step has nuanced details and elaborate processes we will touch upon the overarching process and assume optimistic outcome scenarios.
+</p><br>
+<h2 class="collapsible">&nbsp;&nbsp;&nbsp;&nbsp;Simplified phase list until citizenship of the US is acquired by naturalization</h2>
+<ol class="content">
+    <li>Employer in US sponsors/files application of H1B for a candidate after vetting/interviewing (subject to annual cap)</li>
+    <li>Selection of application for H1B</li>
+    <li>Interview process at US consulate leading to approval of Visa (stamping on passport) or denial</li>
+    <li>Arrival at Port of Entry within stipulated period - Dept. of Homeland security interviews and determines if person may be admitted to the US or deported back immediately</li>
+    <li>Person issued form i-94 with date not exceeding visa expiry date</li>
+    <li>Extension process by employer on H1B, cannot exceed 6 years in total (unless green card process initiated) - Extension may be approved or denied(self deport)</li>
+    <li>Obtain approval from Department of Labor - Can be approved or Denied</li>
+    <li>Initiate i-140 approval petition - Can be approved or Denied based on evidence submitted</li>
+    <li>6 year cap on H1B lifted, file paperwork every 3 years for extension renewal within 6 months of current visa expiration</li>
+    <li>Consulate Visa stamping needed if leaving US even temporarily - restart process at <font color ="blue">step 3</font></li>
+    <li>Wait till priority date becomes current - <font color ="red">For India projected wait time is 30-150 years!</font><a href="https://www.cato.org/blog/150-year-wait-indian-immigrants-advanced-degrees" target="_blank">Additional Public (External) Information</a></li>
+
+</ol>
+<br>
+<h2>Based on your selection in the list above - Relevant information will be presented to you:</h2>
+
+
+
+
+<!--<svg>-->
+<!--    <circle class="target" style="fill: #69b3a2" stroke="black" cx=150 cy=150 r=40 ><text>Start Here</text></circle>-->
+<!--</svg>-->
 
 <!-- Load d3.js -->
 <script src="https://d3js.org/d3.v4.js"></script>
+
+
+<!--<script>-->
+<!--    d3.select(".target")  // select the elements that have the class 'target'-->
+<!--        .style("stroke-width", 8).attr("label","Start") // change their style: stroke width is not equal to 8 pixels-->
+<!--</script>-->
+
 <script>
-    d3
-        .select(".target")  // select the elements that have the class 'target'
-        .style("stroke-width", 8) // change their style: stroke width is not equal to 8 pixels
+    var coll = document.getElementsByClassName("collapsible");
+    var i;
+
+    for (i = 0; i < coll.length; i++) {
+        coll[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var content = this.nextElementSibling;
+            if (content.style.maxHeight){
+                content.style.maxHeight = null;
+            } else {
+                content.style.maxHeight = content.scrollHeight + "px";
+            }
+        });
+    }
 </script>
+
 </body>
+
+
 </html>
