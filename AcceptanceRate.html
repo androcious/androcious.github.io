@@ -32,7 +32,7 @@
 <button onclick="update(data2019)">2019</button>
 <button onclick="update(data1)">2018</button>
 <button onclick="update(data2)">2017</button>
-<br><p >85K approved annually</p>
+<p >85K approved annually</p>
 <!-- Create a div where the graph will take place -->
 <div id="my_dataviz"></div>
 <script>
@@ -40,7 +40,7 @@
     // set the dimensions and margins of the graph
     var width = 250
     height = 250
-    margin = 40
+    margin = 20
 
     // The radius of the pieplot is half the width or half the height (smallest one). I subtract a bit of margin.
     var radius = Math.min(width, height) / 2 - margin
@@ -92,7 +92,15 @@
             .style("stroke-width", "2px")
             .style("opacity", 1)
 
-        // d3.select("text").remove();
+         d3.select("#tes").remove();
+        svg.append("text")
+            .attr("x", (width / 15))
+            .attr("y", 0 - (margin.top /3))
+            .attr("text-anchor", "middle")
+            .attr("id","tes")
+            .style("font-size", "16px")
+            .style("text-decoration", "underline")
+            .text("Denied: "+data.b);
         // svg.append("text")
         //     .attr("x", (width / 15))
         //     .attr("y", 0 - (margin.top /3))
@@ -135,13 +143,14 @@
 
     // Initialize the plot with the first dataset
     update(data2020)
-    svg.append("text")
-        .attr("x", (width / 30))
-        .attr("y", 0 - (margin.top /13))
-        .attr("text-anchor", "middle")
-        .style("font-size", "16px")
-        .style("text-decoration", "underline")
-        .text("85K approved annually");
+    // svg.remove("text");
+    // svg.append("text")
+    //     .attr("x", (width / 30))
+    //     .attr("y", 0 - (margin.top /13))
+    //     .attr("text-anchor", "middle")
+    //     .style("font-size", "16px")
+    //     .style("text-decoration", "underline")
+    //     .text("85K approved annually");
 
 
 </script>

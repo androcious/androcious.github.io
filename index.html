@@ -81,12 +81,12 @@ Humans too since time immemorial have been moving across continents, some for co
 <p class="a" ><a name="href2"><B>Case in Point</B></a><br>
 While there are several legal pathways to entering the United States of America, there are a few paths that allow for permanent residency leading to citizenship. This specific case illustrates in particular the intense process involved in the highly competitive H1B dual intent visa from India.
 While every step has nuanced details and elaborate processes we will touch upon the overarching process and assume optimistic outcome scenarios.
-</p><br>
+</p>
 <h2 class="collapsible">&nbsp;&nbsp;&nbsp;&nbsp;Simplified phase list until citizenship of the US is acquired by naturalization</h2>
 <ol class="content">
     <li>Employer in US sponsors/files application of H1B for a candidate after vetting/interviewing (subject to annual cap)<button class="button3" onclick="toggleDisp('step1')">View Stats</button></li>
     <li>Selection of application for H1B<button class="button2" onclick="toggleDisp('step2')">View Stats</button></li>
-    <li>Interview process at US consulate leading to approval of Visa (stamping on passport) or denial</li>
+    <li>Interview process at US consulate leading to approval of Visa (stamping on passport) or denial<button class="button3" onclick="toggleDisp('step3')">Denial Stats</button></li></li>
     <li>Arrival at Port of Entry within stipulated period - Dept. of Homeland security interviews and determines if person may be admitted to the US or deported back immediately</li>
     <li>Person issued form i-94 with date not exceeding visa expiry date</li>
     <li>Extension process by employer on H1B, cannot exceed 6 years in total (unless green card process initiated) - Extension may be approved or denied(self deport)</li>
@@ -100,11 +100,15 @@ While every step has nuanced details and elaborate processes we will touch upon 
 <br>
 <!--<h2>Based on your selection in the list above - Relevant information will be presented to you:</h2>-->
 <div id="step1" align="center" style="display:none">
-    <embed type="text/html" src="AcceptanceRate.html" width="500" height="300">
+    <embed type="text/html" src="Application.html" width="500" height="300"> <h2>H1b Petition Application Stats</h2>
 </div>
 <div id="step2" align="center" style="display:none">
-    <embed type="text/html" src="impl.html" width="500" height="300">
+    <embed type="text/html" src="AcceptanceRate.html" width="500" height="300"> <h2>Selection for processing Stats (Lottery rejection)</h2>
 </div>
+<div id="step3" align="center" style="display:none">
+    <embed type="text/html" src="DenialRate.html" width="500" height="400"> <h2>H1b Interview Denial Rate Stats</h2>
+</div>
+
 <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
 <svg id="my_dataviz" width="500" height="600"></svg>
 <script src="https://d3js.org/d3.v4.js">
