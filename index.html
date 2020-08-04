@@ -6,6 +6,27 @@
 </head>
 <body>
 <style>
+    .button {
+        background-color: #4CAF50; /* Green */
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+    }
+
+    .button2 {background-color: #008CBA;} /* Blue */
+    .button3 {background-color: #f44336;} /* Red */
+    .button4 {background-color: #e7e7e7; color: black;} /* Gray */
+    .button5 {background-color: #555555;} /* Black */
+    body    {overflow-y:scroll;}
+    li:not(:last-child) {
+        margin-bottom: 5px;
+    }
     .collapsible {
         background-color: #777;
         color: white;
@@ -46,23 +67,25 @@
     }
 </style>
 
-<table width="100%">
+<table width="90%">
     <tr align="center" >
 <td><img src="img/usa.png" width = "200" height="100"></td><td><h1 style="text-align:center;">Case Study: Legal Immigration from India to USA</h1></td><td><img src="img/india.png" width = "200" height="100">
     </td> </tr></table>
 <hr>
+
+
    <p class="a"> <a name="href1"><B>Migration in General:</B></a></p><br>
 Migration is a phenomenon that is embedded in nature itself. Birds migrate based on seasons traveling thousands of miles looking for favorable climates to thrive in.
 Humans too since time immemorial have been moving across continents, some for conquest - others to explore. In today's world also migration is primarily "need-driven". While some choose to emigrate pursuing 'perceived' better opportunity, others might be fleeing persecution.
 <br><br>
-<p class="a"><a name="href2"><B>Case in Point</B></a><br>
+<p class="a" ><a name="href2"><B>Case in Point</B></a><br>
 While there are several legal pathways to entering the United States of America, there are a few paths that allow for permanent residency leading to citizenship. This specific case illustrates in particular the intense process involved in the highly competitive H1B dual intent visa from India.
 While every step has nuanced details and elaborate processes we will touch upon the overarching process and assume optimistic outcome scenarios.
 </p><br>
 <h2 class="collapsible">&nbsp;&nbsp;&nbsp;&nbsp;Simplified phase list until citizenship of the US is acquired by naturalization</h2>
 <ol class="content">
-    <li>Employer in US sponsors/files application of H1B for a candidate after vetting/interviewing (subject to annual cap)</li>
-    <li>Selection of application for H1B</li>
+    <li>Employer in US sponsors/files application of H1B for a candidate after vetting/interviewing (subject to annual cap)<button class="button3" onclick="toggleDisp('step1')">View Stats</button></li>
+    <li>Selection of application for H1B<button class="button2" onclick="toggleDisp('step2')">View Stats</button></li>
     <li>Interview process at US consulate leading to approval of Visa (stamping on passport) or denial</li>
     <li>Arrival at Port of Entry within stipulated period - Dept. of Homeland security interviews and determines if person may be admitted to the US or deported back immediately</li>
     <li>Person issued form i-94 with date not exceeding visa expiry date</li>
@@ -75,19 +98,67 @@ While every step has nuanced details and elaborate processes we will touch upon 
 
 </ol>
 <br>
-<h2>Based on your selection in the list above - Relevant information will be presented to you:</h2>
+<!--<h2>Based on your selection in the list above - Relevant information will be presented to you:</h2>-->
+<div id="step1" align="center" style="display:none">
+    <embed type="text/html" src="AcceptanceRate.html" width="500" height="300">
+</div>
+<div id="step2" align="center" style="display:none">
+    <embed type="text/html" src="impl.html" width="500" height="300">
+</div>
+<script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
+<svg id="my_dataviz" width="500" height="600"></svg>
+<script src="https://d3js.org/d3.v4.js">
+// var map = d3.choropleth()
+// .geofile('/d3-geomap/topojson/countries/USA.json')
+// .projection(d3.geoAlbersUsa)
+// .column('2012')
+// .unitId('fips')
+// .scale(1000)
+// .legend(true);
+//
+// d3.csv('/data/fy2018_gcByState.xlsx').then(data => {
+// map.draw(d3.select('#map').datum(data));
+// });
 
 
+var path = d3.geoPath();
+var projection = d3.geoMercator()
+.scale(70)
+.center([0,20])
+.translate([width / 2, height / 2]);
 
+// Data and color scale
+var data = d3.map();
+var colorScale = d3.scaleThreshold()
+.domain([100000, 1000000, 10000000, 30000000, 100000000, 500000000])
+.range(d3.schemeBlues[7]);
 
-<!--<svg>-->
-<!--    <circle class="target" style="fill: #69b3a2" stroke="black" cx=150 cy=150 r=40 ><text>Start Here</text></circle>-->
-<!--</svg>-->
+// Load external data and boot
+d3.queue()
+.defer(d3.json, "https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson")
+.defer(d3.csv, "https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world_population.csv", function(d) { data.set(d.code, +d.pop); })
+.await(ready);
 
-<!-- Load d3.js -->
-<script src="https://d3js.org/d3.v4.js"></script>
+function ready(error, topo) {
 
+// Draw the map
+svg.append("g")
+.selectAll("path")
+.data(topo.features)
+.enter()
+.append("path")
+// draw each country
+.attr("d", d3.geoPath()
+.projection(projection)
+)
+// set the color of each country
+.attr("fill", function (d) {
+d.total = data.get(d.id) || 0;
+return colorScale(d.total);
+});
+}
 
+</script>
 <!--<script>-->
 <!--    d3.select(".target")  // select the elements that have the class 'target'-->
 <!--        .style("stroke-width", 8).attr("label","Start") // change their style: stroke width is not equal to 8 pixels-->
@@ -108,7 +179,22 @@ While every step has nuanced details and elaborate processes we will touch upon 
             }
         });
     }
+
+    function toggleDisp(x) {
+
+
+        var x = document.getElementById(x);
+        if (x.style.display === "none") {
+            x.style.display = "block";
+            window.location.hash = '#step2';
+        } else {
+            x.style.display = "none";
+        }
+
+    }
 </script>
+
+
 
 </body>
 
